@@ -18,3 +18,47 @@ document.querySelectorAll("a").forEach(link => {
         }
     });
 });
+
+
+
+
+let currentIndex = 0;
+
+function getProjects() {
+    return document.querySelectorAll(".project");
+}
+
+function updateCarousel() {
+    const projects = getProjects();
+
+    projects.forEach((proj, i) => {
+        proj.classList.remove("active", "left", "right");
+
+        if (i === currentIndex) {
+            proj.classList.add("active");
+        } 
+        else if (i === currentIndex - 1) {
+            proj.classList.add("left");
+        } 
+        else if (i === currentIndex + 1) {
+            proj.classList.add("right");
+        }
+    });
+}
+
+function nextProject() {
+    const projects = getProjects();
+    if (currentIndex < projects.length - 1) {
+        currentIndex++;
+        updateCarousel();
+    }
+}
+
+function prevProject() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+    }
+}
+
+window.addEventListener("DOMContentLoaded", updateCarousel);
